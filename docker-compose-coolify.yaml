@@ -1,8 +1,13 @@
+# docker-compose.yml
+version: "3.9"
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile-coolify
+      args:
+        PNPM_VERSION: ${PNPM_VERSION:-7.31.0}
     ports:
       - "3000:5173"
     environment:
@@ -70,7 +75,6 @@ services:
     environment:
       - NODE_ENV=production
       - COMPOSE_PROFILES=production
-      # No strictly needed but serving as hints for Coolify
       - PORT=5173
       - OLLAMA_API_BASE_URL=http://127.0.0.1:11434
       - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
