@@ -2,8 +2,9 @@ FROM node:20.18.0
 
 WORKDIR /app
 
-# Instalar pnpm e wrangler
-RUN corepack enable pnpm && \
+# Desativar Corepack e instalar manualmente o pnpm e o wrangler
+RUN corepack disable && \
+    npm install -g pnpm@9.4.0 && \
     npm install -g wrangler
 
 # Copiar arquivos de dependências
@@ -12,7 +13,7 @@ COPY package.json pnpm-lock.yaml ./
 # Instalar dependências
 RUN pnpm install
 
-# Copiar código  fonte e scripts
+# Copiar código fonte e scripts
 COPY . .
 
 # Garantir que o bindings.sh tem permissões de execução e formato correto
