@@ -22,7 +22,7 @@ RUN tr -d '\r' < bindings.sh > bindings.tmp && \
     chmod +x bindings.sh
 
 # Build da aplicação
-RUN NODE_OPTIONS="--max-old-space-size=2048" pnpm run build
+RUN NODE_OPTIONS="--max-old-space-size=4096" pnpm run build
 
 # Expor porta
 EXPOSE 5173
